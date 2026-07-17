@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Klinik Gigi Sehat | Reservasi Online</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #f9fafb; }
+    .card { background: white; border-radius: 1.25rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: all 0.2s; }
+    .card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .btn-primary { background: #1e3a5f; color: white; border-radius: 999px; font-weight: 500; transition: all 0.2s; padding: 0.75rem 2rem; }
+    .btn-primary:hover { background: #0f2440; transform: translateY(-1px); }
+    .btn-status { transition: all 0.15s; font-size: 0.75rem; padding: 0.35rem 0.8rem; border-radius: 999px; font-weight: 500; cursor: pointer; border: none; }
+    .tab-active { background: white; color: #1e3a5f; box-shadow: 0 2px 6px rgba(0,0,0,0.05); font-weight: 600; }
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-content.open { max-height: 180px; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeSlide 0.4s ease; }
+    .hero-pattern { background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- Navigasi Ringan -->
+<nav class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 px-4 py-3 flex justify-center gap-2">
+  <div class="flex bg-gray-100 rounded-full p-1">
+    <button id="tab-public" class="px-6 py-2 rounded-full text-sm tab-active transition" onclick="switchRole('public')">🏥 Beranda</button>
+    <button id="tab-assistant" class="px-6 py-2 rounded-full text-sm transition" onclick="switchRole('assistant')">👩‍💼 Asisten</button>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ==================== HALAMAN PUBLIK (PASIEN) ==================== -->
+  <div id="public-view" class="animate-in">
+    <!-- HERO SECTION -->
+    <div class="hero-pattern rounded-3xl p-6 md:p-10 mb-10 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-shrink-0">
+        <div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden border-4 border-white">
+          <!-- Placeholder foto dokter (inisial) -->
+          <span class="text-5xl font-bold text-blue-900">DR</span>
+        </div>
+      </div>
+      <div class="text-center md:text-left">
+        <span class="text-sm font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full">👨‍⚕️ Dokter Gigi Profesional</span>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">drg. Rizky, Sp.KG</h1>
+        <p class="text-gray-600 mt-2 max-w-lg">Spesialis Konservasi Gigi dengan pengalaman lebih dari 10 tahun. Memberikan perawatan gigi terbaik dengan teknologi modern dan suasana klinik yang nyaman.</p>
+        <div class="mt-4 flex flex-wrap gap-3 justify-center md:justify-start">
+          <button onclick="document.getElementById('reservasi-section').scrollIntoView({behavior:'smooth'})" class="btn-primary text-sm">📅 Reservasi Sekarang</button>
+          <a href="#profil-dokter" class="bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-50 transition">Lihat Profil</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFIL DOKTER & INFO KLINIK -->
+    <div id="profil-dokter" class="grid md:grid-cols-2 gap-6 mb-10">
+      <div class="card p-6">
+        <h2 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="text-2xl">🩺</span> Profil Dokter</h2>
+        <ul class="space-y-3 text-sm text-gray-700">
+          <li><strong>Nama:</strong> drg. Andi Pratama, Sp.KG</li>
+          <li><strong>Spesialisasi:</strong> Konservasi Gigi (Endodontik, Restorasi Estetik)</li>
+          <li><strong>Pengalaman:</strong> 10+ tahun</li>
+          <li><strong>Pendidikan:</strong> Universitas Indonesia, FKG</li>
+          <li><strong>Registrasi:</strong> STR No. 123456789</li>
+        </ul>
+      </div>
+      <div class="card p-6">
+        <h2 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="text-2xl">📍</span> Informasi Klinik</h2>
+        <p class="text-sm text-gray-700"><strong>Jam Buka:</strong> Senin–Sabtu, 08.00–16.00</p>
+        <p class="text-sm text-gray-700 mt-1"><strong>Alamat:</strong> Jl. Kesehatan No. 12, Jakarta Pusat</p>
+        <div class="mt-4 rounded-xl overflow-hidden border border-gray-100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.4761073036787!2d106.8266333147689!3d-6.175235995527962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5b7a0d1c1b7%3A0x3a2c3c4b5f77c3b!2sMonas!5e0!3m2!1sid!2sid!4v1690000000000" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYANAN & FAQ -->
+    <div class="grid md:grid-cols-2 gap-6 mb-10">
+      <div class="card p-6">
+        <h2 class="text-xl font-bold mb-4">🦷 Layanan Unggulan</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm">Konsultasi</span>
+          <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm">Tambal Gigi</span>
+          <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm">Cabut Gigi</span>
+          <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm">Scaling / Karang Gigi</span>
+          <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm">Behel / Ortodonti</span>
+          <span class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm">Pemutih Gigi</span>
+        </div>
+      </div>
+      <div class="card p-6">
+        <h2 class="text-xl font-bold mb-4">❓ Pertanyaan Umum</h2>
+        <div class="space-y-4 text-sm">
+          <div>
+            <button class="faq-toggle w-full text-left font-medium flex justify-between items-center py-1" onclick="toggleFAQ(this)">Apakah bisa langsung datang? <span class="text-gray-400">+</span></button>
+            <div class="faq-content pl-2 text-gray-600 mt-1">Kami menerima pasien dengan reservasi online untuk mengurangi waktu tunggu. Walk-in tetap dilayani jika slot tersedia.</div>
+          </div>
+          <div>
+            <button class="faq-toggle w-full text-left font-medium flex justify-between items-center py-1" onclick="toggleFAQ(this)">Biaya konsultasi? <span class="text-gray-400">+</span></button>
+            <div class="faq-content pl-2 text-gray-600 mt-1">Konsultasi awal Rp 50.000. Biaya tindakan akan diinformasikan setelah pemeriksaan.</div>
+          </div>
+          <div>
+            <button class="faq-toggle w-full text-left font-medium flex justify-between items-center py-1" onclick="toggleFAQ(this)">Apakah menerima BPJS? <span class="text-gray-400">+</span></button>
+            <div class="faq-content pl-2 text-gray-600 mt-1">Untuk sementara kami belum bekerja sama dengan BPJS, namun menyediakan paket perawatan terjangkau.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM RESERVASI (dengan ID untuk scroll) -->
+    <div id="reservasi-section" class="card p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">📅 Formulir Reservasi</h2>
+      <form id="reservationForm" class="space-y-5">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Kunjungan</label>
+            <input type="date" id="apptDate" required class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm focus:ring-2 focus:ring-blue-100 focus:border-blue-300">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Slot Waktu</label>
+            <select id="timeSlot" required class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm focus:ring-2 focus:ring-blue-100">
+              <option value="">-- Pilih slot --</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+            <input type="text" id="fullName" required placeholder="Nama Anda" class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">No. WhatsApp</label>
+            <input type="tel" id="whatsapp" required placeholder="62812xxxx" class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm">
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Usia</label>
+            <input type="number" id="age" min="1" max="120" required class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
+            <select id="gender" required class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm">
+              <option value="">Pilih</option><option>Laki-laki</option><option>Perempuan</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Keluhan Utama</label>
+            <select id="complaint" required class="w-full rounded-xl border-gray-200 bg-gray-50 p-2.5 text-sm">
+              <option value="">Pilih keluhan</option>
+              <option>Konsultasi</option><option>Sakit Gigi</option><option>Karang Gigi</option><option>Cabut Gigi</option><option>Tambal</option><option>Lainnya</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary w-full text-sm">Daftar Reservasi</button>
+      </form>
+    </div>
+
+    <!-- SUKSES RESERVASI -->
+    <div id="success-view" class="card p-8 text-center hidden animate-in">
+      <div class="text-5xl mb-3">✅</div>
+      <h2 class="text-2xl font-bold text-gray-800">Reservasi Berhasil!</h2>
+      <div class="my-6 bg-blue-50 p-5 rounded-2xl inline-block">
+        <p class="text-sm text-blue-800">Nomor Antrian Anda</p>
+        <p id="queueNumberDisplay" class="text-4xl font-extrabold text-blue-900 mt-1">-</p>
+        <p class="text-sm mt-2">Estimasi kedatangan: <span id="estimatedTime" class="font-semibold">-</span> WIB</p>
+      </div>
+      <div class="flex justify-center gap-3 mt-4">
+        <a id="whatsappConfirmLink" href="#" target="_blank" class="bg-green-600 text-white px-5 py-2.5 rounded-full text-sm hover:bg-green-700 transition flex items-center gap-2">
+          💬 Konfirmasi via WhatsApp
+        </a>
+        <button onclick="resetReservation()" class="bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-full text-sm hover:bg-gray-50 transition">Buat Reservasi Baru</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD ASISTEN ==================== -->
+  <div id="assistant-view" class="hidden animate-in">
+    <div id="assistant-login" class="max-w-md mx-auto card p-6 mt-10">
+      <h2 class="text-xl font-bold mb-4 text-center">Login Asisten</h2>
+      <input type="email" id="assistEmail" placeholder="asisten@klinik.com" class="w-full p-3 border rounded-xl mb-2 text-sm bg-gray-50">
+      <input type="password" id="assistPass" placeholder="password" class="w-full p-3 border rounded-xl mb-4 text-sm bg-gray-50">
+      <button onclick="loginAssistant()" class="btn-primary w-full text-sm">Masuk</button>
+      <p class="text-xs text-gray-400 mt-3 text-center">demo: asisten@klinik.com / 123</p>
+    </div>
+    <div id="assistant-dashboard" class="hidden">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">📋 Antrian Hari Ini</h2>
+        <div class="flex gap-2">
+          <button onclick="exportData()" class="text-sm bg-white border px-4 py-2 rounded-full hover:bg-gray-50 transition">📥 Unduh CSV</button>
+          <button onclick="logout('assistant')" class="text-sm text-red-500 font-medium">Logout</button>
+        </div>
+      </div>
+      <div class="card overflow-x-auto p-4">
+        <table class="w-full text-sm" id="assistantTable">
+          <thead><tr class="text-left text-gray-500 border-b"><th class="py-2">No Antrian</th><th>Nama</th><th>Slot</th><th>Keluhan</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody id="assistantQueueBody"></tbody>
+        </table>
+        <div id="empty-queue" class="text-center py-8 text-gray-400 hidden">Belum ada pasien terdaftar hari ini.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // ========== STATE & STORAGE ==========
+  const STORAGE_KEY = 'clinic_demo_v2';
+  let appData = { bookings: [] };
+
+  function loadData() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    appData = saved ? JSON.parse(saved) : { bookings: [] };
+  }
+  function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
+
+  function generateTimeSlots() {
+    const slots = [];
+    for (let h = 8; h < 16; h++) {
+      for (let m of [0, 30]) {
+        if (h === 15 && m === 30) continue;
+        const start = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        const endH = m === 30 ? h+1 : h;
+        const endM = m === 30 ? '00' : '30';
+        slots.push(`${start}-${String(endH).padStart(2,'0')}:${endM}`);
+      }
+    }
+    return slots;
+  }
+
+  function updateSlotDropdown() {
+    const dateInput = document.getElementById('apptDate');
+    const slotSelect = document.getElementById('timeSlot');
+    if (!dateInput || !slotSelect) return;
+    const selectedDate = dateInput.value;
+    slotSelect.innerHTML = '<option value="">-- Pilih slot --</option>';
+    if (!selectedDate) return;
+    const bookedSlots = appData.bookings.filter(b => b.date === selectedDate && b.status !== 'cancelled').map(b => b.timeSlot);
+    generateTimeSlots().forEach(slot => {
+      const opt = document.createElement('option');
+      opt.value = slot;
+      opt.textContent = slot;
+      if (bookedSlots.includes(slot)) {
+        opt.disabled = true;
+        opt.textContent += ' (penuh)';
+      }
+      slotSelect.appendChild(opt);
+    });
+  }
+
+  // Inisialisasi tanggal
+  document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+    const dateInput = document.getElementById('apptDate');
+    if (dateInput) {
+      const today = new Date().toISOString().slice(0,10);
+      dateInput.min = today;
+      dateInput.value = today;
+      dateInput.addEventListener('change', updateSlotDropdown);
+      updateSlotDropdown();
+    }
+    const role = sessionStorage.getItem('activeRole') || 'public';
+    switchRole(role);
+    if (sessionStorage.getItem('assistantLoggedIn') === 'true') showAssistantDashboard();
+  });
+
+  // ========== NAVIGASI ==========
+  function switchRole(role) {
+    document.getElementById('public-view').classList.add('hidden');
+    document.getElementById('assistant-view').classList.add('hidden');
+    document.getElementById('tab-public').classList.remove('tab-active');
+    document.getElementById('tab-assistant').classList.remove('tab-active');
+    if (role === 'public') {
+      document.getElementById('public-view').classList.remove('hidden');
+      document.getElementById('tab-public').classList.add('tab-active');
+    } else if (role === 'assistant') {
+      document.getElementById('assistant-view').classList.remove('hidden');
+      document.getElementById('tab-assistant').classList.add('tab-active');
+      if (sessionStorage.getItem('assistantLoggedIn') === 'true') showAssistantDashboard();
+    }
+    sessionStorage.setItem('activeRole', role);
+  }
+
+  // ========== FAQ ==========
+  function toggleFAQ(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('span');
+    content.classList.toggle('open');
+    icon.textContent = content.classList.contains('open') ? '−' : '+';
+  }
+
+  // ========== RESERVASI ==========
+  document.getElementById('reservationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const date = document.getElementById('apptDate').value;
+    const timeSlot = document.getElementById('timeSlot').value;
+    const name = document.getElementById('fullName').value.trim();
+    const wa = document.getElementById('whatsapp').value.trim();
+    const age = document.getElementById('age').value;
+    const gender = document.getElementById('gender').value;
+    const complaint = document.getElementById('complaint').value;
+    if (!date || !timeSlot || !name || !wa || !age || !gender || !complaint) return alert('Lengkapi semua field.');
+    if (appData.bookings.some(b => b.date === date && b.timeSlot === timeSlot && b.status !== 'cancelled')) {
+      alert('Slot sudah penuh.'); updateSlotDropdown(); return;
+    }
+    const sameDay = appData.bookings.filter(b => b.date === date);
+    const queueNum = sameDay.length + 1;
+    const newBooking = {
+      id: Date.now().toString(),
+      date, timeSlot, name, whatsapp: wa, age, gender, complaint,
+      queueNumber: `AN-${String(queueNum).padStart(3,'0')}`,
+      status: 'booked',
+      createdAt: new Date().toISOString()
+    };
+    appData.bookings.push(newBooking);
+    saveData();
+    document.getElementById('queueNumberDisplay').textContent = newBooking.queueNumber;
+    document.getElementById('estimatedTime').textContent = timeSlot.split('-')[0];
+    document.getElementById('reservasi-section').classList.add('hidden');
+    document.getElementById('success-view').classList.remove('hidden');
+    const msg = `Halo, saya ${name} ingin konfirmasi reservasi. No antrian ${newBooking.queueNumber}, ${date} jam ${timeSlot}.`;
+    document.getElementById('whatsappConfirmLink').href = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+    updateSlotDropdown();
+  });
+
+  function resetReservation() {
+    document.getElementById('reservasi-section').classList.remove('hidden');
+    document.getElementById('success-view').classList.add('hidden');
+    document.getElementById('reservationForm').reset();
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById('apptDate').value = today;
+    updateSlotDropdown();
+  }
+
+  // ========== ASISTEN ==========
+  function loginAssistant() {
+    if (document.getElementById('assistEmail').value === 'asisten@klinik.com' && document.getElementById('assistPass').value === '123') {
+      sessionStorage.setItem('assistantLoggedIn', 'true');
+      showAssistantDashboard();
+    } else alert('Email/password salah.');
+  }
+
+  function showAssistantDashboard() {
+    document.getElementById('assistant-login').classList.add('hidden');
+    document.getElementById('assistant-dashboard').classList.remove('hidden');
+    renderAssistantQueue();
+  }
+
+  function renderAssistantQueue() {
+    const today = new Date().toISOString().slice(0,10);
+    const todayBookings = appData.bookings.filter(b => b.date === today);
+    const tbody = document.getElementById('assistantQueueBody');
+    const emptyMsg = document.getElementById('empty-queue');
+    if (todayBookings.length === 0) {
+      tbody.innerHTML = '';
+      emptyMsg.classList.remove('hidden');
+      return;
+    }
+    emptyMsg.classList.add('hidden');
+    tbody.innerHTML = todayBookings.map(b => `
+      <tr class="border-b last:border-0">
+        <td class="py-3 font-medium">${b.queueNumber}</td>
+        <td>${b.name}</td>
+        <td>${b.timeSlot}</td>
+        <td>${b.complaint}</td>
+        <td><span class="inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusColor(b.status)}">${statusLabel(b.status)}</span></td>
+        <td class="flex gap-1 flex-wrap py-2">
+          ${b.status === 'booked' ? `<button class="btn-status bg-blue-100 text-blue-700" onclick="updateStatus('${b.id}','present')">Hadir</button>` : ''}
+          ${b.status !== 'cancelled' && b.status !== 'completed' ? `<button class="btn-status bg-red-100 text-red-700" onclick="updateStatus('${b.id}','cancelled')">Batal</button>` : ''}
+          ${b.status === 'present' ? `<button class="btn-status bg-green-100 text-green-700" onclick="updateStatus('${b.id}','completed')">Selesai</button>` : ''}
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function updateStatus(bookingId, newStatus) {
+    const booking = appData.bookings.find(b => b.id === bookingId);
+    if (booking) { booking.status = newStatus; saveData(); renderAssistantQueue(); }
+  }
+
+  function statusColor(s) {
+    return { booked: 'bg-yellow-50 text-yellow-700', present: 'bg-blue-50 text-blue-700', completed: 'bg-green-50 text-green-700', cancelled: 'bg-red-50 text-red-700' }[s] || '';
+  }
+  function statusLabel(s) {
+    return { booked: 'Menunggu', present: 'Hadir', completed: 'Selesai', cancelled: 'Batal' }[s] || s;
+  }
+
+  function logout(role) {
+    if (role === 'assistant') {
+      sessionStorage.removeItem('assistantLoggedIn');
+      document.getElementById('assistant-dashboard').classList.add('hidden');
+      document.getElementById('assistant-login').classList.remove('hidden');
+    }
+  }
+
+  function exportData() {
+    if (appData.bookings.length === 0) return alert('Belum ada data.');
+    let csv = 'Nama,WhatsApp,Tanggal,Slot,Keluhan,Status\n';
+    appData.bookings.forEach(b => csv += `"${b.name}","${b.whatsapp}","${b.date}","${b.timeSlot}","${b.complaint}","${b.status}"\n`);
+    const blob = new Blob([csv], {type: 'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'data_pasien.csv'; a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
