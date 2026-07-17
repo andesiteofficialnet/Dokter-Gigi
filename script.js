@@ -242,8 +242,18 @@
     // ============================================================
     const form = document.getElementById('reservationForm');
     const dateInput = document.getElementById('reservationDate');
+    const timeInput = document.getElementById('reservationTime');
     dateInput.value = getTodayStr();
     dateInput.min = getTodayStr();
+
+    // Keyboard numerik di ponsel tidak selalu menyediakan tanda titik dua.
+    // Ubah empat digit yang diketik pasien menjadi format waktu JJ:MM.
+    timeInput.addEventListener('input', function() {
+        const digits = this.value.replace(/\D/g, '').slice(0, 4);
+        this.value = digits.length > 2
+            ? digits.slice(0, 2) + ':' + digits.slice(2)
+            : digits;
+    });
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
