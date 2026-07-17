@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klinik Sehat - Reservasi & Antrian Digital</title>
+
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container-custom" id="toastContainer"></div>
+
+    <!-- ============================================================ -->
+    <!-- ===== HALAMAN UTAMA (PASIEN) ===== -->
+    <!-- ============================================================ -->
+    <div id="patientView" class="patient-only">
+        <nav class="navbar navbar-expand-lg navbar-custom sticky-top patient-nav">
+            <div class="container">
+                <a class="navbar-brand" href="#">Klinik Sehat</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="#hero">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#antrian">Antrian</a></li>
+                        <li class="nav-item"><a class="nav-link" href="?admin=true">Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <span class="hero-badge">Reservasi Online</span>
+                        <h1 class="hero-title">Kelola <span>antrian pasien</span> dengan mudah</h1>
+                        <p class="hero-sub">Daftar konsultasi, lihat status antrian, dan kelola admin klinik dalam satu sistem sederhana.</p>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="queueCountDisplay">0 pasien</div>
+                                <div class="stat-label">Antrian hari ini</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="queueSummaryNumber">—</div>
+                                <div class="stat-label">Nomor terkini</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 offset-lg-1 fade-up">
+                        <div class="hero-img-wrapper">
+                            <div class="doctor-avatar"><i class="bi bi-person-circle"></i></div>
+                            <div class="clinic-name">Klinik Sehat</div>
+                            <div class="doctor-spec">Layanan kesehatan cepat</div>
+                            <div class="doctor-exp">Reservasi modern untuk pasien</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="antrian" class="py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-6 fade-up">
+                        <div class="card card-custom">
+                            <div class="card-header-custom">Form Reservasi</div>
+                            <div class="card-body">
+                                <form id="reservationForm">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="patientName">Nama Lengkap</label>
+                                        <input id="patientName" class="form-control" type="text" placeholder="Nama pasien" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="patientPhone">Nomor WhatsApp</label>
+                                        <input id="patientPhone" class="form-control" type="tel" placeholder="0812xxxxxxx" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="reservationDate">Tanggal</label>
+                                        <input id="reservationDate" class="form-control" type="date" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="reservationTime">Waktu</label>
+                                        <input id="reservationTime" class="form-control" type="text" inputmode="numeric" placeholder="Contoh: 08:30" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" autocomplete="off" required />
+                                        <div class="form-text">Masukkan waktu dalam format 24 jam, misalnya 08:30.</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="patientComplaint">Keluhan</label>
+                                        <textarea id="patientComplaint" class="form-control" rows="3" placeholder="Keluhan singkat"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary-custom">Daftar Sekarang</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 fade-up">
+                        <div class="card card-custom">
+                            <div class="card-header-custom">Daftar Antrian Hari Ini</div>
+                            <div class="card-body queue-table">
+                                <div class="mb-3">
+                                    <div class="queue-number-display">
+                                        <div class="big-number" id="displayQueueNumber">—</div>
+                                        <div class="label" id="displayQueueStatus">Belum reservasi</div>
+                                        <div class="label" id="estWaitTime">~15-30 menit</div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th>Waktu</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="queueBody"></tbody>
+                                    </table>
+                                </div>
+                                <div id="emptyQueue" class="text-center py-4">
+                                    <div class="empty-queue-icon">😷</div>
+                                    <p class="mb-0 mt-2">Belum ada antrian.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="adminView" class="admin-mode">
+        <div id="adminLoginScreen" class="admin-login-screen">
+            <div class="login-page">
+                <div class="login-card">
+                    <div class="brand-icon"><i class="bi bi-shield-lock-fill"></i></div>
+                    <h4 class="text-center">Login Admin</h4>
+                    <form id="adminLoginForm">
+                        <div class="mb-3">
+                            <label class="form-label" for="adminPassword">Password</label>
+                            <input id="adminPassword" class="form-control" type="password" placeholder="Password" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary-custom w-100">Masuk</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="adminPanelWrapper" class="admin-panel-wrapper container py-5">
+            <div class="admin-panel">
+                <div class="admin-header">
+                    <div>
+                        <h4 class="mb-0">Panel Admin</h4>
+                        <small>Kelola antrian dan status pasien</small>
+                    </div>
+                    <div>
+                        <button id="backToPatientFromAdmin" class="btn btn-outline-primary-custom me-2">Kembali ke Pasien</button>
+                        <button id="adminLogoutBtn" class="btn btn-outline-danger-custom">Logout</button>
+                    </div>
+                </div>
+                <div class="admin-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Daftar Antrian</h5>
+                        <button id="resetQueueBtnAdmin" class="btn btn-sm btn-outline-danger-custom">Reset Antrian</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Waktu</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminQueueBody"></tbody>
+                        </table>
+                    </div>
+                    <div id="adminEmptyQueue" class="text-center py-4">Belum ada antrian hari ini.</div>
+                </div>
+                <div class="mt-4">
+                    <button id="backToPatientBtn" class="btn btn-outline-primary-custom">Kembali ke Pasien</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
