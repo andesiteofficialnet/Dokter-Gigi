@@ -90,8 +90,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="reservationTime">Waktu</label>
-                                        <input id="reservationTime" class="form-control" type="text" inputmode="numeric" placeholder="Contoh: 08:30" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" autocomplete="off" required />
-                                        <div class="form-text">Masukkan waktu dalam format 24 jam, misalnya 08:30.</div>
+                                        <input id="reservationTime" class="form-control" type="text" inputmode="numeric" placeholder="Contoh: 08:30" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" autocomplete="off" aria-describedby="timeHelp" required />
+                                        <div id="timeHelp" class="form-text">Ketik 4 angka, misalnya 0830; format akan menjadi 08:30.</div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="patientComplaint">Keluhan</label>
