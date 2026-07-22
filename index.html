@@ -1,200 +1,1089 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Klinik Sehat - Reservasi & Antrian Digital</title>
 
-    <!-- Bootstrap 5 + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-bright": "#f8f9ff",
+                "inverse-primary": "#b4c5ff",
+                "primary-fixed-dim": "#b4c5ff",
+                "surface-variant": "#d5e3fc",
+                "tertiary-fixed-dim": "#c4c7c9",
+                "on-primary": "#ffffff",
+                "surface-tint": "#0053db",
+                "surface-container-lowest": "#ffffff",
+                "outline": "#737686",
+                "surface-container-low": "#eff4ff",
+                "on-primary-container": "#eeefff",
+                "tertiary": "#525657",
+                "secondary-fixed-dim": "#4ae176",
+                "on-primary-fixed": "#00174b",
+                "on-tertiary": "#ffffff",
+                "tertiary-container": "#6b6e70",
+                "inverse-on-surface": "#eaf1ff",
+                "on-tertiary-fixed-variant": "#444749",
+                "outline-variant": "#c3c6d7",
+                "on-secondary-container": "#007432",
+                "background": "#f8f9ff",
+                "on-surface-variant": "#434655",
+                "on-background": "#0d1c2e",
+                "on-tertiary-container": "#eff1f3",
+                "surface-container-highest": "#d5e3fc",
+                "inverse-surface": "#233144",
+                "primary": "#004ac6",
+                "surface": "#f8f9ff",
+                "on-error-container": "#93000a",
+                "surface-container-high": "#dce9ff",
+                "on-secondary-fixed": "#002109",
+                "on-primary-fixed-variant": "#003ea8",
+                "secondary-fixed": "#6bff8f",
+                "on-secondary-fixed-variant": "#005321",
+                "secondary": "#006e2f",
+                "on-tertiary-fixed": "#191c1e",
+                "tertiary-fixed": "#e0e3e5",
+                "secondary-container": "#6bff8f",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#dbe1ff",
+                "surface-dim": "#ccdbf3",
+                "surface-container": "#e6eeff",
+                "on-error": "#ffffff",
+                "on-secondary": "#ffffff",
+                "primary-container": "#2563eb",
+                "on-surface": "#0d1c2e",
+                "error": "#ba1a1a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "md": "16px",
+                "xs": "4px",
+                "lg": "24px",
+                "unit": "4px",
+                "container-max": "1200px",
+                "xxl": "80px",
+                "sm": "8px",
+                "xl": "48px",
+                "gutter": "24px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "headline-lg-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-sm": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<!-- ========== CUSTOM CSS: Ambient Shadow, Hover Lift & Modal Animations ========== -->
+<style>
+  /* Ambient shadow – soft, floating card effect */
+  .ambient-shadow {
+    box-shadow: 0 2px 16px rgba(0, 53, 219, 0.06), 0 8px 32px rgba(0, 30, 100, 0.04);
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+  }
+  .ambient-shadow:hover {
+    box-shadow: 0 6px 28px rgba(0, 53, 219, 0.12), 0 14px 48px rgba(0, 30, 100, 0.08);
+  }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+  /* Hover lift – subtle upward movement on hover */
+  .hover-lift {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
 
-    <!-- ===== TOAST CONTAINER ===== -->
-    <div class="toast-container-custom" id="toastContainer"></div>
+  /* Modal overlay animation */
+  .modal-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
 
-    <!-- ============================================================ -->
-    <!-- ===== HALAMAN UTAMA (PASIEN) ===== -->
-    <!-- ============================================================ -->
-    <div id="patientView" class="patient-only">
-        <nav class="navbar navbar-expand-lg navbar-custom sticky-top patient-nav">
-            <div class="container">
-                <a class="navbar-brand" href="#">Klinik Sehat</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+  /* Modal panel animation */
+  .modal-panel {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .modal-overlay.active .modal-panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Time slot pill styles */
+  .time-slot-pill {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  .time-slot-pill:hover:not(.disabled) {
+    border-color: #004ac6;
+    background-color: #eff4ff;
+  }
+  .time-slot-pill.selected {
+    background-color: #004ac6;
+    color: #ffffff;
+    border-color: #004ac6;
+    font-weight: 600;
+  }
+  .time-slot-pill.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Success checkmark animation */
+  @keyframes checkmark-pop {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .checkmark-animate {
+    animation: checkmark-pop 0.5s ease forwards;
+  }
+
+  /* Scrollbar styling for modal body */
+  .modal-body-scroll::-webkit-scrollbar {
+    width: 5px;
+  }
+  .modal-body-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+  .modal-body-scroll::-webkit-scrollbar-thumb {
+    background: #c3c6d7;
+    border-radius: 10px;
+  }
+</style>
+<meta charset="utf-8"/></head><body class="bg-background text-on-background font-body-md antialiased pt-20">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant/30 dark:border-outline/20 shadow-sm flex justify-between items-center h-20 px-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+            Praktek dr. Danny Cayadi &amp; dr. Asni
+        </div>
+<div class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant dark:text-on-surface hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-300 px-sm py-xs rounded" href="#">Services</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-300 px-sm py-xs rounded" href="#">Doctors</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-300 px-sm py-xs rounded" href="#">About</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-300 px-sm py-xs rounded" href="#">Blog</a>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-colors hidden md:block btn-book-appointment" data-doctor="">
+            Book Appointment
+        </button>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-[80vh] flex items-center px-gutter max-w-container-max mx-auto my-xl rounded-2xl overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="bg-cover bg-center w-full h-full opacity-90" data-alt="A pristine, luxury medical and dental clinic interior. Bright, natural light floods the modern waiting area, highlighting sleek minimalist furniture, calming white and pale blue walls, and spotless glass partitions. The atmosphere is highly professional, sterile yet deeply comforting, evoking advanced healthcare and premium human care. Corporate modernism style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaOrnJZE6lHlEShvWSQzGcGvzI1qCCspU_WtIsEXrVz_9qXXX1o4xvrF7wAtcNdDcL4VawWxN36u1YvBbPbGEjx0IoesLn4ijVMwvl-zqzYJ0IkxzdVvd56O3ATQOaVWABl_nMnLplSyTGg0oD3iGb3bnbBdvDuHIU5kK8i_TlzfFC6TcdXasX4GDeiCsHRfQm94-xgoihtUUBY-gO_DK9AXCjVvfjeaArJjOVk8kDtUU3EYSibeB2fvJgUQOt5e55YA8kVSnrX17e')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface/95 via-surface/80 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full md:w-3/5 space-y-xl py-xxl px-lg">
+<div class="space-y-md">
+<h1 class="font-display-lg text-display-lg text-primary md:hidden font-headline-lg-mobile text-headline-lg-mobile">
+                    Pelayanan Kesehatan Terpercaya untuk Seluruh Keluarga
+                </h1>
+<h1 class="font-display-lg text-display-lg text-primary hidden md:block">
+                    Pelayanan Kesehatan Terpercaya untuk Seluruh Keluarga
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Memberikan pelayanan medis yang nyaman, cepat, dan profesional dengan pendekatan yang lebih personal.
+                </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-md">
+<button class="bg-primary text-on-primary px-lg py-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-sm hover:opacity-90 transition-opacity btn-book-appointment" data-doctor="">
+                    Book Appointment
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border-2 border-secondary text-secondary px-lg py-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-secondary hover:text-on-secondary transition-colors" id="btn-whatsapp-hero">
+<span class="material-symbols-outlined">chat</span>
+                    WhatsApp Us
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#hero">Beranda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#antrian">Antrian</a></li>
-                        <li class="nav-item"><a class="nav-link" href="?admin=true">Admin</a></li>
-                    </ul>
-                </div>
+</div>
+<!-- Trust Row -->
+<div class="grid grid-cols-3 gap-md pt-lg border-t border-outline-variant/30">
+<div>
+<div class="font-headline-md text-headline-md text-primary flex items-center gap-xs">
+                        4.9 <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Google Rating</div>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-primary">15+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Years Experience</div>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-primary">10k+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Happy Patients</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="max-w-container-max mx-auto px-gutter py-xxl">
+<div class="text-center mb-xl space-y-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary md:hidden font-headline-lg-mobile text-headline-lg-mobile">Our Specialties</h2>
+<h2 class="font-headline-lg text-headline-lg text-primary hidden md:block">Our Specialties</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">Comprehensive medical services tailored to your unique health needs.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Service Cards -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-lg ambient-shadow hover-lift cursor-pointer flex flex-col items-start gap-md">
+<div class="bg-primary-container text-on-primary-container p-sm rounded-xl">
+<span class="material-symbols-outlined text-[32px]">stethoscope</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">General Consultation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Comprehensive health checkups, diagnostics, and personalized treatment plans.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-lg ambient-shadow hover-lift cursor-pointer flex flex-col items-start gap-md">
+<div class="bg-secondary-container text-on-secondary-container p-sm rounded-xl">
+<span class="material-symbols-outlined text-[32px]">monitor_heart</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">Medical Checkup</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Complete body health screening to ensure your well-being.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-lg ambient-shadow hover-lift cursor-pointer flex flex-col items-start gap-md">
+<div class="bg-tertiary-container text-on-tertiary-container p-sm rounded-xl">
+<span class="material-symbols-outlined text-[32px]">blood_pressure</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">Blood Pressure Check</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Regular monitoring of your blood pressure for a healthier heart.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-lg ambient-shadow hover-lift cursor-pointer flex flex-col items-start gap-md">
+<div class="bg-primary-container text-on-primary-container p-sm rounded-xl">
+<span class="material-symbols-outlined text-[32px]">thermostat</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">Fever Treatment</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Effective diagnostics and treatment for fevers and infections.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-lg ambient-shadow hover-lift cursor-pointer flex flex-col items-start gap-md">
+<div class="bg-secondary-container text-on-secondary-container p-sm rounded-xl">
+<span class="material-symbols-outlined text-[32px]">child_care</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">Children Consultation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Specialized care and medical attention for your little ones.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-lg ambient-shadow hover-lift cursor-pointer flex flex-col items-start gap-md">
+<div class="bg-tertiary-container text-on-tertiary-container p-sm rounded-xl">
+<span class="material-symbols-outlined text-[32px]">health_and_safety</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">Health Consultation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">General advice and consultations to maintain a healthy lifestyle.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Doctors Section -->
+<section class="bg-surface-container-low py-xxl px-gutter">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-xl space-y-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary md:hidden font-headline-lg-mobile text-headline-lg-mobile">Meet Our Doctors</h2>
+<h2 class="font-headline-lg text-headline-lg text-primary hidden md:block">Meet Our Doctors</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">Expert care delivered by highly qualified medical professionals.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg max-w-4xl mx-auto">
+<!-- Dr. Danny Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden ambient-shadow hover-lift flex flex-col">
+<div class="bg-cover bg-center w-full h-64" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFSFlistjuc0VMA5VN3hq69tH9JoOW01tOnd0DisMpugrwkFd-X1NHzEdfJJnV1cVm3oRWY1e_db9qU3NK77G0zwFfY1vpzmeilJIziTS34ACuGIpiBFINHpEhyQ2aG0yyJq0o6Uyv3MUkQdEskN1KOvIYVLyxKmkchmeT-gcIc0PFzrZw_OS8Qm9fidf568A3OZG4jAVtggU5kwJH89CvddhpTaLGGrMbGHL7AtQ7A5J722yfjFygsvoK3FwDwIHGjr6OhvLoJCZj')"></div>
+<div class="p-lg text-center space-y-md flex-grow flex flex-col">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary">dr. Danny Cayadi</h4>
+<p class="font-label-sm text-label-sm text-secondary mb-sm">General Practitioner</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Providing comprehensive medical care and personalized treatment plans with a focus on patient well-being.</p>
+</div>
+<div class="mt-auto pt-md">
+<div class="text-label-sm text-on-surface-variant mb-md">Schedule: Mon, Wed, Fri (9AM - 5PM)</div>
+<button class="w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-label-md text-label-md py-sm rounded-lg transition-colors btn-book-appointment" data-doctor="danny">
+                    Book with dr. Danny
+                </button>
+</div>
+</div>
+</div>
+<!-- Dr. Asni Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden ambient-shadow hover-lift flex flex-col">
+<div class="bg-cover bg-center w-full h-64" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8bKtE6jZylxYgCehd5f4piVdvOltO1C3fOp-B-qxqVMHODaWtDAe_XcyahU4KvxD87HdO6YFFV8ignRP2yAq9nAFuk2mnaJG6kZVy3QBoyO4Sos1twDD3nd0vvASQVL5Y0NzWlbqFK9D8rIvKjjf-0p0UkGuV7BXuIH0ciI-xlluk5dxWGd1UvIvXYLTvPDrkvBjvHZn3nA-zG0vGsGB452Xyi7e3nDarZBQH7JQ4clvQpFUXGuK2_85O89pW6qvYqZjtSpguf2yb')"></div>
+<div class="p-lg text-center space-y-md flex-grow flex flex-col">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary">dr. Asni</h4>
+<p class="font-label-sm text-label-sm text-secondary mb-sm">Pediatrician</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Dedicated to providing compassionate, comprehensive care for children and adolescents in a friendly, welcoming environment.</p>
+</div>
+<div class="mt-auto pt-md">
+<div class="text-label-sm text-on-surface-variant mb-md">Schedule: Tue, Thu, Sat (10AM - 4PM)</div>
+<button class="w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-label-md text-label-md py-sm rounded-lg transition-colors btn-book-appointment" data-doctor="asni">
+                    Book with dr. Asni
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map & Hours Section -->
+<section class="max-w-container-max mx-auto px-gutter py-xxl grid grid-cols-1 md:grid-cols-2 gap-lg items-center">
+<div class="space-y-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary md:hidden font-headline-lg-mobile text-headline-lg-mobile mb-xs">Visit Our Clinic</h2>
+<h2 class="font-headline-lg text-headline-lg text-primary hidden md:block mb-xs">Visit Our Clinic</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Conveniently located to serve you better.</p>
+</div>
+<div class="bg-surface-container-low p-lg rounded-2xl space-y-md border border-outline-variant/30">
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-xs">location_on</span>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Jl. Airlangga No.118</div>
+<div class="font-body-md text-body-md text-on-surface-variant">Mojosari, Kabupaten Mojokerto</div>
+</div>
+</div>
+<hr class="border-outline-variant/30"/>
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-xs">schedule</span>
+<div class="w-full">
+<div class="font-label-md text-label-md text-on-surface mb-sm">Clinic Hours</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant border-b border-outline-variant/20 py-xs">
+<span class="">Mon - Fri</span> <span class="">8:00 AM - 8:00 PM</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant border-b border-outline-variant/20 py-xs">
+<span class="">Saturday</span> <span class="">9:00 AM - 5:00 PM</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant py-xs">
+<span class="">Sunday</span> <span class="text-secondary font-label-md">Closed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="h-96 rounded-2xl overflow-hidden border border-outline-variant/30 bg-surface-container-low flex items-center justify-center">
+<!-- Placeholder for Map -->
+<img class="object-cover w-full h-full opacity-80 mix-blend-multiply" data-alt="A clean, stylized digital map view centered on a premium medical clinic location in a major metropolitan area. The map uses a minimalist, light-mode color palette with soft greys for roads, pale green for parks, and a prominent, elegant blue pin marker indicating the clinic's location. The aesthetic matches modern corporate UI design." data-location="Mojokerto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4xNzcDJ9Z66VnXev5Air3URG2S-mw_LsO0UVwxyfLNEGXfWgL7cDBF4Kc0fjkqYPmXPPQYpQ3OkDipU47cLREdhtwo1RT26qiISB3qqlSG1V8EQw3SIdo0QKFQR415yOeg14Z2CczIbhy_qN-Zqmg4dwP5bQQw8xR65e2Y2UJFnOwPnFRmG8_Jku7kLuqsspiBgUnMJfx0l34I9As2XJLbXmbIXAA4-xjJzp5vZfYsZl3J8n7SdC_gLIJ-fWnzH7_dQqtsnmXj-g0"/>
+</div>
+</section>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface w-full mt-xxl border-t border-outline-variant flat no shadows grid grid-cols-1 md:grid-cols-4 gap-lg px-gutter py-xl max-w-container-max mx-auto">
+<div class="space-y-md">
+<div class="font-headline-md text-headline-md text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                Praktek dr. Danny Cayadi &amp; dr. Asni
             </div>
-        </nav>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant">Pelayanan Kesehatan Terpercaya untuk Seluruh Keluarga.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Clinic Hours</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Location</a>
+</div>
+<div class="md:col-span-4 border-t border-outline-variant/30 pt-md mt-md text-center">
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant">© 2024 Praktek dr. Danny Cayadi &amp; dr. Asni. All rights reserved.</p>
+</div>
+</footer>
 
-        <section id="hero" class="hero-section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <span class="hero-badge">Reservasi Online</span>
-                        <h1 class="hero-title">Kelola <span>antrian pasien</span> dengan mudah</h1>
-                        <p class="hero-sub">Daftar konsultasi, lihat status antrian, dan kelola admin klinik dalam satu sistem sederhana.</p>
-                        <div class="hero-stats">
-                            <div class="stat-item">
-                                <div class="stat-number" id="queueCountDisplay">0 pasien</div>
-                                <div class="stat-label">Antrian hari ini</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number" id="queueSummaryNumber">—</div>
-                                <div class="stat-label">Nomor terkini</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 offset-lg-1 fade-up">
-                        <div class="hero-img-wrapper">
-                            <div class="doctor-avatar"><i class="bi bi-person-circle"></i></div>
-                            <div class="clinic-name">Klinik Sehat</div>
-                            <div class="doctor-spec">Layanan kesehatan cepat</div>
-                            <div class="doctor-exp">Reservasi modern untuk pasien</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ========== APPOINTMENT MODAL ========== -->
+<div class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-gutter bg-black/50 backdrop-blur-sm" id="appointmentModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal-panel bg-surface-container-lowest rounded-2xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col ambient-shadow">
+<!-- Modal Header -->
+<div class="flex items-center justify-between p-lg border-b border-outline-variant/20 shrink-0">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">event_available</span>
+<h3 class="font-headline-md text-headline-md text-primary" id="modal-title">Book Appointment</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-xs rounded-full hover:bg-surface-container-low" id="btnCloseModal" aria-label="Close modal">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
 
-        <section id="antrian" class="py-5">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-6 fade-up">
-                        <div class="card card-custom">
-                            <div class="card-header-custom">Form Reservasi</div>
-                            <div class="card-body">
-                                <form id="reservationForm">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="patientName">Nama Lengkap</label>
-                                        <input id="patientName" class="form-control" type="text" placeholder="Nama pasien" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="patientPhone">Nomor WhatsApp</label>
-                                        <input id="patientPhone" class="form-control" type="tel" placeholder="0812xxxxxxx" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="reservationDate">Tanggal</label>
-                                        <input id="reservationDate" class="form-control" type="date" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="reservationTime">Waktu</label>
-                                        <input id="reservationTime" class="form-control" type="text" inputmode="numeric" placeholder="Contoh: 08:30" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" maxlength="5" autocomplete="off" aria-describedby="timeHelp" required />
-                                        <div id="timeHelp" class="form-text">Ketik 4 angka, misalnya 0830; format akan menjadi 08:30.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="patientComplaint">Keluhan</label>
-                                        <textarea id="patientComplaint" class="form-control" rows="3" placeholder="Keluhan singkat"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary-custom">Daftar Sekarang</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 fade-up">
-                        <div class="card card-custom">
-                            <div class="card-header-custom">Daftar Antrian Hari Ini</div>
-                            <div class="card-body queue-table">
-                                <div class="mb-3">
-                                    <div class="queue-number-display">
-                                        <div class="big-number" id="displayQueueNumber">—</div>
-                                        <div class="label" id="displayQueueStatus">Belum reservasi</div>
-                                        <div class="label" id="estWaitTime">~15-30 menit</div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Waktu</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="queueBody"></tbody>
-                                    </table>
-                                </div>
-                                <div id="emptyQueue" class="text-center py-4">
-                                    <div class="empty-queue-icon">😷</div>
-                                    <p class="mb-0 mt-2">Belum ada antrian.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+<!-- Modal Body – Form View -->
+<div class="modal-body-scroll overflow-y-auto p-lg space-y-lg flex-grow" id="modalBodyForm">
+<p class="font-body-md text-body-md text-on-surface-variant">Fill in the details below to schedule your visit.</p>
 
-    <div id="adminView" class="admin-mode">
-        <div id="adminLoginScreen" class="admin-login-screen">
-            <div class="login-page">
-                <div class="login-card">
-                    <div class="brand-icon"><i class="bi bi-shield-lock-fill"></i></div>
-                    <h4 class="text-center">Login Admin</h4>
-                    <form id="adminLoginForm">
-                        <div class="mb-3">
-                            <label class="form-label" for="adminPassword">Password</label>
-                            <input id="adminPassword" class="form-control" type="password" placeholder="Password" required />
-                        </div>
-                        <button type="submit" class="btn btn-primary-custom w-100">Masuk</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="adminPanelWrapper" class="admin-panel-wrapper container py-5">
-            <div class="admin-panel">
-                <div class="admin-header">
-                    <div>
-                        <h4 class="mb-0">Panel Admin</h4>
-                        <small>Kelola antrian dan status pasien</small>
-                    </div>
-                    <div>
-                        <button id="backToPatientFromAdmin" class="btn btn-outline-primary-custom me-2">Kembali ke Pasien</button>
-                        <button id="adminLogoutBtn" class="btn btn-outline-danger-custom">Logout</button>
-                    </div>
-                </div>
-                <div class="admin-body">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="mb-0">Daftar Antrian</h5>
-                        <button id="resetQueueBtnAdmin" class="btn btn-sm btn-outline-danger-custom">Reset Antrian</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Waktu</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminQueueBody"></tbody>
-                        </table>
-                    </div>
-                    <div id="adminEmptyQueue" class="text-center py-4">Belum ada antrian hari ini.</div>
-                </div>
-                <div class="mt-4">
-                    <button id="backToPatientBtn" class="btn btn-outline-primary-custom">Kembali ke Pasien</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Doctor Selection -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface block">Select Doctor <span class="text-error">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-sm" id="doctorSelectGroup">
+<button class="doctor-option border-2 border-outline-variant rounded-xl p-md text-left transition-all hover:border-primary flex items-center gap-sm" data-doctor="danny" role="radio" aria-checked="false">
+<div class="bg-primary-container text-on-primary-container p-xs rounded-lg shrink-0">
+<span class="material-symbols-outlined text-[24px]">stethoscope</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">dr. Danny Cayadi</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">General Practitioner</div>
+<div class="font-label-sm text-label-sm text-secondary">Mon, Wed, Fri • 9AM–5PM</div>
+</div>
+</button>
+<button class="doctor-option border-2 border-outline-variant rounded-xl p-md text-left transition-all hover:border-primary flex items-center gap-sm" data-doctor="asni" role="radio" aria-checked="false">
+<div class="bg-secondary-container text-on-secondary-container p-xs rounded-lg shrink-0">
+<span class="material-symbols-outlined text-[24px]">child_care</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">dr. Asni</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Pediatrician</div>
+<div class="font-label-sm text-label-sm text-secondary">Tue, Thu, Sat • 10AM–4PM</div>
+</div>
+</button>
+</div>
+<p class="text-error font-label-sm text-label-sm hidden" id="doctorError">Please select a doctor.</p>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- Date Picker -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface block" for="appointmentDate">Preferred Date <span class="text-error">*</span></label>
+<input class="w-full border border-outline-variant rounded-xl px-md py-sm font-body-md text-body-md text-on-surface bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="appointmentDate" type="date"/>
+<p class="text-error font-label-sm text-label-sm hidden" id="dateError">Please select a valid date for the chosen doctor.</p>
+<p class="text-on-surface-variant font-label-sm text-label-sm hidden" id="dateHint">The doctor is available on this day. Pick a time slot below.</p>
+</div>
+
+<!-- Time Slots -->
+<div class="space-y-sm" id="timeSlotsContainer">
+<label class="font-label-md text-label-md text-on-surface block">Preferred Time <span class="text-error">*</span></label>
+<div class="grid grid-cols-3 sm:grid-cols-4 gap-xs" id="timeSlotsGrid">
+<p class="col-span-full font-body-md text-body-md text-on-surface-variant italic text-center py-md" id="timeSlotsPlaceholder">Select a doctor and date to see available time slots.</p>
+</div>
+<p class="text-error font-label-sm text-label-sm hidden" id="timeError">Please select a time slot.</p>
+</div>
+
+<!-- Patient Name -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface block" for="patientName">Full Name <span class="text-error">*</span></label>
+<input class="w-full border border-outline-variant rounded-xl px-md py-sm font-body-md text-body-md text-on-surface bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="patientName" placeholder="Enter your full name" type="text"/>
+<p class="text-error font-label-sm text-label-sm hidden" id="nameError">Please enter your full name.</p>
+</div>
+
+<!-- Phone / WhatsApp -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface block" for="patientPhone">Phone / WhatsApp <span class="text-error">*</span></label>
+<input class="w-full border border-outline-variant rounded-xl px-md py-sm font-body-md text-body-md text-on-surface bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="patientPhone" placeholder="e.g. 0812-3456-7890" type="tel"/>
+<p class="text-error font-label-sm text-label-sm hidden" id="phoneError">Please enter a valid phone number (min. 10 digits).</p>
+</div>
+
+<!-- Email (Optional) -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface block" for="patientEmail">Email <span class="text-on-surface-variant font-label-sm">(Optional)</span></label>
+<input class="w-full border border-outline-variant rounded-xl px-md py-sm font-body-md text-body-md text-on-surface bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="patientEmail" placeholder="your@email.com" type="email"/>
+</div>
+
+<!-- Reason for Visit -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface block" for="visitReason">Reason for Visit <span class="text-error">*</span></label>
+<textarea class="w-full border border-outline-variant rounded-xl px-md py-sm font-body-md text-body-md text-on-surface bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none" id="visitReason" placeholder="Briefly describe your symptoms or purpose of visit..." rows="3"></textarea>
+<p class="text-error font-label-sm text-label-sm hidden" id="reasonError">Please describe the reason for your visit.</p>
+</div>
+
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary px-lg py-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-sm hover:opacity-90 transition-opacity" id="btnSubmitAppointment">
+<span class="material-symbols-outlined">check_circle</span>
+            Confirm Appointment
+        </button>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center">You will receive a confirmation via WhatsApp.</p>
+</div>
+
+<!-- Modal Body – Success View (hidden by default) -->
+<div class="modal-body-scroll overflow-y-auto p-lg space-y-lg flex-grow hidden flex-col items-center text-center justify-center" id="modalBodySuccess">
+<div class="w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center checkmark-animate">
+<span class="material-symbols-outlined text-[48px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="space-y-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Appointment Booked!</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Your appointment has been successfully scheduled.</p>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md w-full text-left space-y-sm border border-outline-variant/20">
+<div class="flex justify-between font-body-md text-body-md"><span class="text-on-surface-variant">Booking ID</span><span class="font-label-md text-primary" id="successBookingId">—</span></div>
+<div class="flex justify-between font-body-md text-body-md"><span class="text-on-surface-variant">Doctor</span><span class="font-label-md text-on-surface" id="successDoctor">—</span></div>
+<div class="flex justify-between font-body-md text-body-md"><span class="text-on-surface-variant">Date</span><span class="font-label-md text-on-surface" id="successDate">—</span></div>
+<div class="flex justify-between font-body-md text-body-md"><span class="text-on-surface-variant">Time</span><span class="font-label-md text-on-surface" id="successTime">—</span></div>
+<div class="flex justify-between font-body-md text-body-md"><span class="text-on-surface-variant">Patient</span><span class="font-label-md text-on-surface" id="successName">—</span></div>
+</div>
+<div class="flex flex-col sm:flex-row gap-md w-full">
+<button class="flex-1 border-2 border-secondary text-secondary px-lg py-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-secondary hover:text-on-secondary transition-colors" id="btnWhatsAppConfirm">
+<span class="material-symbols-outlined">chat</span>
+                Confirm via WhatsApp
+            </button>
+<button class="flex-1 bg-primary text-on-primary px-lg py-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-sm hover:opacity-90 transition-opacity" id="btnCloseSuccess">
+<span class="material-symbols-outlined">close</span>
+                Close
+            </button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== APPOINTMENT SYSTEM JAVASCRIPT ========== -->
+<script>
+(function() {
+  // ──────────────────────────────────────
+  // DOM References
+  // ──────────────────────────────────────
+  const modal = document.getElementById('appointmentModal');
+  const modalBodyForm = document.getElementById('modalBodyForm');
+  const modalBodySuccess = document.getElementById('modalBodySuccess');
+  const btnCloseModal = document.getElementById('btnCloseModal');
+  const btnCloseSuccess = document.getElementById('btnCloseSuccess');
+  const btnSubmit = document.getElementById('btnSubmitAppointment');
+  const btnWhatsAppConfirm = document.getElementById('btnWhatsAppConfirm');
+  const btnWhatsAppHero = document.getElementById('btn-whatsapp-hero');
+
+  // Doctor selection
+  const doctorOptions = document.querySelectorAll('.doctor-option');
+  const doctorError = document.getElementById('doctorError');
+
+  // Date
+  const appointmentDate = document.getElementById('appointmentDate');
+  const dateError = document.getElementById('dateError');
+  const dateHint = document.getElementById('dateHint');
+
+  // Time slots
+  const timeSlotsGrid = document.getElementById('timeSlotsGrid');
+  const timeSlotsPlaceholder = document.getElementById('timeSlotsPlaceholder');
+  const timeError = document.getElementById('timeError');
+
+  // Patient info
+  const patientName = document.getElementById('patientName');
+  const patientPhone = document.getElementById('patientPhone');
+  const patientEmail = document.getElementById('patientEmail');
+  const visitReason = document.getElementById('visitReason');
+  const nameError = document.getElementById('nameError');
+  const phoneError = document.getElementById('phoneError');
+  const reasonError = document.getElementById('reasonError');
+
+  // Success fields
+  const successBookingId = document.getElementById('successBookingId');
+  const successDoctor = document.getElementById('successDoctor');
+  const successDate = document.getElementById('successDate');
+  const successTime = document.getElementById('successTime');
+  const successName = document.getElementById('successName');
+
+  // ──────────────────────────────────────
+  // State
+  // ──────────────────────────────────────
+  let selectedDoctor = null;       // 'danny' | 'asni' | null
+  let selectedDate = null;        // 'YYYY-MM-DD' | null
+  let selectedTime = null;        // 'HH:MM' | null
+  let lastBookingData = null;     // Stores the latest successful booking
+
+  // Doctor schedules
+  const doctorSchedules = {
+    danny: {
+      name: 'dr. Danny Cayadi',
+      specialty: 'General Practitioner',
+      days: [1, 3, 5],           // Mon(1), Wed(3), Fri(5)
+      dayNames: ['Monday', 'Wednesday', 'Friday'],
+      startHour: 9,
+      endHour: 17,              // 5 PM
+    },
+    asni: {
+      name: 'dr. Asni',
+      specialty: 'Pediatrician',
+      days: [2, 4, 6],           // Tue(2), Thu(4), Sat(6)
+      dayNames: ['Tuesday', 'Thursday', 'Saturday'],
+      startHour: 10,
+      endHour: 16,              // 4 PM
+    },
+  };
+
+  // WhatsApp number (configurable)
+  const WHATSAPP_NUMBER = '6281234567890'; // Replace with actual clinic number
+
+  // ──────────────────────────────────────
+  // Helper Functions
+  // ──────────────────────────────────────
+  function generateBookingId() {
+    const prefix = 'APPT';
+    const timestamp = Date.now().toString(36).toUpperCase().slice(-6);
+    const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+    return `${prefix}-${timestamp}-${random}`;
+  }
+
+  function formatDateDisplay(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr + 'T00:00:00');
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return d.toLocaleDateString('en-ID', options);
+  }
+
+  function getDayOfWeek(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.getDay(); // 0=Sun, 1=Mon, ... 6=Sat
+  }
+
+  function isDateValidForDoctor(dateStr, doctorKey) {
+    if (!dateStr || !doctorKey) return false;
+    const day = getDayOfWeek(dateStr);
+    return doctorSchedules[doctorKey].days.includes(day);
+  }
+
+  function generateTimeSlots(doctorKey, dateStr) {
+    const slots = [];
+    if (!doctorKey || !dateStr) return slots;
+    const schedule = doctorSchedules[doctorKey];
+    const now = new Date();
+    const todayStr = now.toISOString().split('T')[0];
+    const isToday = (dateStr === todayStr);
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+
+    for (let h = schedule.startHour; h < schedule.endHour; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        // Skip times before current time if today
+        if (isToday) {
+          if (h < currentHour || (h === currentHour && m <= currentMinutes)) {
+            continue;
+          }
+        }
+        // Skip the very last slot if it would end after endHour
+        if (h === schedule.endHour - 1 && m === 30) {
+          // For endHour=17, last slot is 16:30 which ends at 17:00 – okay
+          // For endHour=16, last slot is 15:30 which ends at 16:00 – okay
+          // 16:00 would end at 16:30 – not okay, so skip h=endHour
+        }
+        if (h >= schedule.endHour) continue;
+        const hh = String(h).padStart(2, '0');
+        const mm = String(m).padStart(2, '0');
+        slots.push(`${hh}:${mm}`);
+      }
+    }
+    return slots;
+  }
+
+  function renderTimeSlots(slots) {
+    timeSlotsGrid.innerHTML = '';
+    if (slots.length === 0) {
+      timeSlotsGrid.innerHTML = '<p class="col-span-full font-body-md text-body-md text-on-surface-variant italic text-center py-md">No available time slots for this date. Please choose another date.</p>';
+      timeSlotsPlaceholder.classList.add('hidden');
+      return;
+    }
+    timeSlotsPlaceholder.classList.add('hidden');
+    slots.forEach(slot => {
+      const pill = document.createElement('div');
+      pill.className = 'time-slot-pill border-2 border-outline-variant rounded-lg px-sm py-xs text-center font-label-sm text-label-sm text-on-surface';
+      pill.textContent = slot;
+      pill.dataset.time = slot;
+      pill.addEventListener('click', function() {
+        // Remove selected from all
+        document.querySelectorAll('.time-slot-pill.selected').forEach(el => el.classList.remove('selected'));
+        // Add selected to clicked
+        pill.classList.add('selected');
+        selectedTime = slot;
+        hideError(timeError);
+      });
+      timeSlotsGrid.appendChild(pill);
+    });
+  }
+
+  function clearTimeSlots() {
+    timeSlotsGrid.innerHTML = '';
+    timeSlotsPlaceholder.classList.remove('hidden');
+    timeSlotsPlaceholder.textContent = 'Select a doctor and date to see available time slots.';
+    selectedTime = null;
+  }
+
+  // ──────────────────────────────────────
+  // Error Helpers
+  // ──────────────────────────────────────
+  function showError(el) { if (el) el.classList.remove('hidden'); }
+  function hideError(el) { if (el) el.classList.add('hidden'); }
+  function hideAllErrors() {
+    hideError(doctorError);
+    hideError(dateError);
+    hideError(dateHint);
+    hideError(timeError);
+    hideError(nameError);
+    hideError(phoneError);
+    hideError(reasonError);
+  }
+
+  // ──────────────────────────────────────
+  // Modal Controls
+  // ──────────────────────────────────────
+  function openModal(preselectedDoctor = null) {
+    hideAllErrors();
+    resetForm();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    modalBodyForm.classList.remove('hidden');
+    modalBodySuccess.classList.add('hidden');
+    // Remove selected from all doctor options
+    doctorOptions.forEach(opt => {
+      opt.classList.remove('border-primary', 'bg-surface-container-low');
+      opt.setAttribute('aria-checked', 'false');
+    });
+    selectedDoctor = null;
+    selectedDate = null;
+    selectedTime = null;
+    clearTimeSlots();
+    appointmentDate.value = '';
+    appointmentDate.min = new Date().toISOString().split('T')[0];
+
+    // If a doctor was preselected, activate that option
+    if (preselectedDoctor && doctorSchedules[preselectedDoctor]) {
+      const targetOption = document.querySelector(`.doctor-option[data-doctor="${preselectedDoctor}"]`);
+      if (targetOption) {
+        selectDoctorOption(targetOption, preselectedDoctor);
+      }
+    }
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    resetForm();
+  }
+
+  function resetForm() {
+    hideAllErrors();
+    patientName.value = '';
+    patientPhone.value = '';
+    patientEmail.value = '';
+    visitReason.value = '';
+    appointmentDate.value = '';
+    selectedDoctor = null;
+    selectedDate = null;
+    selectedTime = null;
+    clearTimeSlots();
+    doctorOptions.forEach(opt => {
+      opt.classList.remove('border-primary', 'bg-surface-container-low');
+      opt.setAttribute('aria-checked', 'false');
+    });
+  }
+
+  function showSuccessView(bookingData) {
+    lastBookingData = bookingData;
+    modalBodyForm.classList.add('hidden');
+    modalBodySuccess.classList.remove('hidden');
+    modalBodySuccess.classList.add('flex');
+    successBookingId.textContent = bookingData.bookingId;
+    successDoctor.textContent = bookingData.doctorName;
+    successDate.textContent = formatDateDisplay(bookingData.date);
+    successTime.textContent = bookingData.time;
+    successName.textContent = bookingData.patientName;
+  }
+
+  function selectDoctorOption(optionEl, doctorKey) {
+    doctorOptions.forEach(opt => {
+      opt.classList.remove('border-primary', 'bg-surface-container-low');
+      opt.setAttribute('aria-checked', 'false');
+    });
+    optionEl.classList.add('border-primary', 'bg-surface-container-low');
+    optionEl.setAttribute('aria-checked', 'true');
+    selectedDoctor = doctorKey;
+    hideError(doctorError);
+    // Re-validate date if already selected
+    if (appointmentDate.value) {
+      handleDateChange();
+    } else {
+      clearTimeSlots();
+    }
+  }
+
+  // ──────────────────────────────────────
+  // Event: Doctor Selection
+  // ──────────────────────────────────────
+  doctorOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const doctorKey = this.dataset.doctor;
+      selectDoctorOption(this, doctorKey);
+    });
+  });
+
+  // ──────────────────────────────────────
+  // Event: Date Change
+  // ──────────────────────────────────────
+  function handleDateChange() {
+    const dateVal = appointmentDate.value;
+    hideError(dateError);
+    hideError(dateHint);
+    clearTimeSlots();
+    selectedDate = null;
+    selectedTime = null;
+
+    if (!dateVal) return;
+
+    if (!selectedDoctor) {
+      dateHint.classList.remove('hidden');
+      dateHint.textContent = 'Please select a doctor first to check availability.';
+      return;
+    }
+
+    if (!isDateValidForDoctor(dateVal, selectedDoctor)) {
+      showError(dateError);
+      dateError.textContent = `This doctor is not available on ${formatDateDisplay(dateVal)}. Available days: ${doctorSchedules[selectedDoctor].dayNames.join(', ')}.`;
+      appointmentDate.value = '';
+      return;
+    }
+
+    // Valid date – generate time slots
+    hideError(dateError);
+    dateHint.classList.remove('hidden');
+    dateHint.textContent = 'The doctor is available on this day. Pick a time slot below.';
+    selectedDate = dateVal;
+    const slots = generateTimeSlots(selectedDoctor, dateVal);
+    renderTimeSlots(slots);
+  }
+
+  appointmentDate.addEventListener('change', handleDateChange);
+  appointmentDate.addEventListener('input', handleDateChange);
+
+  // ──────────────────────────────────────
+  // Event: Form Submission
+  // ──────────────────────────────────────
+  btnSubmit.addEventListener('click', function() {
+    hideAllErrors();
+    let isValid = true;
+
+    // Validate doctor
+    if (!selectedDoctor) {
+      showError(doctorError);
+      isValid = false;
+    }
+
+    // Validate date
+    if (!appointmentDate.value || !selectedDate || !isDateValidForDoctor(appointmentDate.value, selectedDoctor)) {
+      showError(dateError);
+      if (!appointmentDate.value) {
+        dateError.textContent = 'Please select a preferred date.';
+      }
+      isValid = false;
+    }
+
+    // Validate time
+    if (!selectedTime) {
+      showError(timeError);
+      isValid = false;
+    }
+
+    // Validate name
+    const nameVal = patientName.value.trim();
+    if (!nameVal || nameVal.length < 2) {
+      showError(nameError);
+      isValid = false;
+    }
+
+    // Validate phone
+    const phoneVal = patientPhone.value.replace(/[\s\-()]/g, '');
+    if (!phoneVal || phoneVal.length < 10 || !/^[0-9+]+$/.test(phoneVal)) {
+      showError(phoneError);
+      isValid = false;
+    }
+
+    // Validate reason
+    const reasonVal = visitReason.value.trim();
+    if (!reasonVal || reasonVal.length < 5) {
+      showError(reasonError);
+      isValid = false;
+    }
+
+    if (!isValid) {
+      // Scroll to first error
+      const firstError = modalBodyForm.querySelector('.text-error:not(.hidden)');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    // All valid – create booking
+    const bookingData = {
+      bookingId: generateBookingId(),
+      doctorKey: selectedDoctor,
+      doctorName: doctorSchedules[selectedDoctor].name,
+      date: selectedDate,
+      time: selectedTime,
+      patientName: nameVal,
+      patientPhone: phoneVal,
+      patientEmail: patientEmail.value.trim() || '(not provided)',
+      visitReason: reasonVal,
+      createdAt: new Date().toISOString(),
+    };
+
+    // Log booking (in production, send to server)
+    console.log('📋 New Appointment Booking:', bookingData);
+
+    // Store in localStorage for demo persistence
+    const existingBookings = JSON.parse(localStorage.getItem('clinicAppointments') || '[]');
+    existingBookings.push(bookingData);
+    localStorage.setItem('clinicAppointments', JSON.stringify(existingBookings));
+
+    // Show success
+    showSuccessView(bookingData);
+  });
+
+  // ──────────────────────────────────────
+  // Event: WhatsApp Confirmation (from success screen)
+  // ──────────────────────────────────────
+  btnWhatsAppConfirm.addEventListener('click', function() {
+    if (!lastBookingData) return;
+    const message = encodeURIComponent(
+      `Halo, saya ingin mengkonfirmasi janji temu:\n\n` +
+      `🆔 Booking ID: ${lastBookingData.bookingId}\n` +
+      `👨‍⚕️ Dokter: ${lastBookingData.doctorName}\n` +
+      `📅 Tanggal: ${formatDateDisplay(lastBookingData.date)}\n` +
+      `⏰ Jam: ${lastBookingData.time}\n` +
+      `👤 Pasien: ${lastBookingData.patientName}\n` +
+      `📝 Keluhan: ${lastBookingData.visitReason}\n\n` +
+      `Terima kasih.`
+    );
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+  });
+
+  // ──────────────────────────────────────
+  // Event: WhatsApp Hero Button
+  // ──────────────────────────────────────
+  if (btnWhatsAppHero) {
+    btnWhatsAppHero.addEventListener('click', function() {
+      const message = encodeURIComponent(
+        'Halo, saya ingin bertanya mengenai layanan di Praktek dr. Danny Cayadi & dr. Asni. Terima kasih.'
+      );
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    });
+  }
+
+  // ──────────────────────────────────────
+  // Event: Close Buttons
+  // ──────────────────────────────────────
+  btnCloseModal.addEventListener('click', closeModal);
+  btnCloseSuccess.addEventListener('click', closeModal);
+
+  // Close on overlay click
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // ──────────────────────────────────────
+  // Event: All "Book Appointment" Buttons
+  // ──────────────────────────────────────
+  document.querySelectorAll('.btn-book-appointment').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const doctorPreselection = this.dataset.doctor || null;
+      openModal(doctorPreselection);
+    });
+  });
+
+  // ──────────────────────────────────────
+  // Initialize: Set min date to today
+  // ──────────────────────────────────────
+  appointmentDate.min = new Date().toISOString().split('T')[0];
+
+  console.log('✅ Appointment system initialized successfully.');
+  console.log('📞 WhatsApp number:', WHATSAPP_NUMBER);
+  console.log('💡 Click any "Book Appointment" button to test the modal.');
+})();
+</script>
+</body></html>
